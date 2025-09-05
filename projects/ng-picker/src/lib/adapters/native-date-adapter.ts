@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {inject, Injectable} from '@angular/core';
-import {DateAdapter, DP_DATE_LOCALE} from './date-adapter';
+import { inject, Injectable } from '@angular/core';
+import { DateAdapter, DP_DATE_LOCALE } from './date-adapter';
 
 /**
  * Matches strings that have the form of a valid RFC 3339 string
@@ -44,13 +44,12 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   useUtcForDisplay = false;
 
   /** The injected locale. */
-  private readonly _dpDateLocale = inject(DP_DATE_LOCALE, {optional: true});
-
+  private readonly _dpDateLocale = inject(DP_DATE_LOCALE, { optional: true });
 
   constructor() {
     super();
 
-    const dpDateLocale = inject(DP_DATE_LOCALE, {optional: true});
+    const dpDateLocale = inject(DP_DATE_LOCALE, { optional: true });
 
     if (dpDateLocale !== undefined) {
       this._dpDateLocale = dpDateLocale;
@@ -76,22 +75,22 @@ export class NativeDateAdapter extends DateAdapter<Date> {
   }
 
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-    const dtf = new Intl.DateTimeFormat(this.locale, {month: style, timeZone: 'utc'});
-    return range(12, i => this._format(dtf, new Date(2017, i, 1)));
+    const dtf = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
+    return range(12, (i) => this._format(dtf, new Date(2017, i, 1)));
   }
 
   getDateNames(): string[] {
-    const dtf = new Intl.DateTimeFormat(this.locale, {day: 'numeric', timeZone: 'utc'});
-    return range(31, i => this._format(dtf, new Date(2017, 0, i + 1)));
+    const dtf = new Intl.DateTimeFormat(this.locale, { day: 'numeric', timeZone: 'utc' });
+    return range(31, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
   }
 
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
-    const dtf = new Intl.DateTimeFormat(this.locale, {weekday: style, timeZone: 'utc'});
-    return range(7, i => this._format(dtf, new Date(2017, 0, i + 1)));
+    const dtf = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
+    return range(7, (i) => this._format(dtf, new Date(2017, 0, i + 1)));
   }
 
   getYearName(date: Date): string {
-    const dtf = new Intl.DateTimeFormat(this.locale, {year: 'numeric', timeZone: 'utc'});
+    const dtf = new Intl.DateTimeFormat(this.locale, { year: 'numeric', timeZone: 'utc' });
     return this._format(dtf, date);
   }
 
@@ -100,8 +99,8 @@ export class NativeDateAdapter extends DateAdapter<Date> {
     // in the internal types so we need to cast to `any`.
     if (typeof Intl !== 'undefined' && (Intl as any).Locale) {
       const locale = new (Intl as any).Locale(this.locale) as {
-        getWeekInfo?: () => {firstDay: number};
-        weekInfo?: {firstDay: number};
+        getWeekInfo?: () => { firstDay: number };
+        weekInfo?: { firstDay: number };
       };
 
       // Some browsers implement a `getWeekInfo` method while others have a `weekInfo` getter.
@@ -167,7 +166,7 @@ export class NativeDateAdapter extends DateAdapter<Date> {
       throw Error('NativeDateAdapter: Cannot format invalid date.');
     }
 
-    const dtf = new Intl.DateTimeFormat(this.locale, {...displayFormat, timeZone: 'utc'});
+    const dtf = new Intl.DateTimeFormat(this.locale, { ...displayFormat, timeZone: 'utc' });
     return this._format(dtf, date);
   }
 

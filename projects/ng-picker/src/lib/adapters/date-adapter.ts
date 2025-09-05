@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {inject, InjectionToken, LOCALE_ID} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 /** InjectionToken for datepicker that can be used to override default locale code. */
 export const DP_DATE_LOCALE = new InjectionToken('DP_DATE_LOCALE', {
   providedIn: 'root',
   factory: () => inject(LOCALE_ID),
 });
-
 
 /** Adapts type `D` to be usable as a date by cdk-based components that work with dates. */
 export abstract class DateAdapter<D, L = any> {
@@ -348,5 +347,32 @@ export abstract class DateAdapter<D, L = any> {
       return max;
     }
     return date;
+  }
+
+  /**
+   * Sets the month on the given date.
+   * @param date date to set month
+   * @param month month to set
+   */
+  setMonth(date: D, month: number) {
+    return this.createDate(this.getYear(date), month, this.getDate(date));
+  }
+
+  /**
+   * Sets the year on the given date.
+   * @param date date to set year
+   * @param year year to set
+   */
+  setYear(date: D, year: number) {
+    return this.createDate(year, this.getMonth(date), this.getDate(date));
+  }
+
+  /**
+   * Sets the date on the given date.
+   * @param date date to set day
+   * @param day day to set
+   */
+  setDate(date: D, day: number) {
+    return this.createDate(this.getYear(date), this.getMonth(date), day);
   }
 }

@@ -1,0 +1,6 @@
+@let _cell=cell(); @if(calendarCellRef();as _ref) {
+<ng-container *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"></ng-container>
+} @else{
+{{ _cell.displayValue }} {{ _cell.isToday ? '*' : '' }}
+
+}

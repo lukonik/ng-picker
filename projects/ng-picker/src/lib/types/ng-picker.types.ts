@@ -7,4 +7,9 @@ export enum ViewTypes {
 export interface DateCell {
   value: number;
   displayValue: string;
+  isToday: boolean;
+}
+
+export interface CalendarCellRefContext {
+  $implicit: DateCell;
 }

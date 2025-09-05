@@ -1,3 +1,7 @@
 @switch (view()) { @case ('month') {
-<pk-month-view [period]="period()"></pk-month-view>
+<pk-month-view
+  [calendarCellRef]="calendarCellRef()"
+  [period]="period()"
+  [today]="today()"
+></pk-month-view>
 } }

@@ -1,3 +1,18 @@
-@for (cell of cells(); track $index) {
-{{ cell }}
-}
+<table role="grid">
+  <thead>
+    <tr>
+      @for (week of weekDays(); track $index) {
+      <th style="width: 40px; text-align: left">{{ week }}</th>
+      }
+    </tr>
+  </thead>
+  @for (weekCell of weekCells(); track $index) {
+  <tr>
+    @for (cell of weekCell; track $index) {
+    <td style="width: 40px">
+      <pk-month-view-cell [calendarCellRef]="calendarCellRef()" [cell]="cell"></pk-month-view-cell>
+    </td>
+    }
+  </tr>
+  }
+</table>
