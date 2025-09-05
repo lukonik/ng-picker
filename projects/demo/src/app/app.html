@@ -1,3 +1,5 @@
 <pk-datepicker>
-  <ng-template pkCalendarCellRef let-date> OLLAAA {{ date.displayValue }} </ng-template>
+  <ng-template pkCalendarCellRef let-cell>
+    {{ cell.displayValue }} is today:{{ cell.isToday }}
+  </ng-template>
 </pk-datepicker>
