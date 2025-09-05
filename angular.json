@@ -3,5 +3,34 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ng-picker": {
+      "projectType": "library",
+      "root": "projects/ng-picker",
+      "sourceRoot": "projects/ng-picker/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-picker/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-picker/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ng-picker/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "bb554963-8c54-4fbd-b146-bcaaa57ba1d9"
   }
 }
