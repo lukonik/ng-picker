@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/ng-picker",
       "sourceRoot": "projects/ng-picker/src",
-      "prefix": "lib",
+      "prefix": "pk",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -32,5 +32,5 @@
   },
   "cli": {
     "analytics": "bb554963-8c54-4fbd-b146-bcaaa57ba1d9"
-  }
+  },
 }
