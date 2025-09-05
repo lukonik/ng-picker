@@ -26,6 +26,16 @@
           "options": {
             "tsConfig": "projects/ng-picker/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ng-picker/**/*.ts",
+              "projects/ng-picker/**/*.html"
+            ],
+            "eslintConfig": "projects/ng-picker/eslint.config.js"
+          }
         }
       }
     },
@@ -110,5 +120,5 @@
   },
   "cli": {
     "analytics": "bb554963-8c54-4fbd-b146-bcaaa57ba1d9"
-  },
+  }
 }

@@ -1,8 +1,8 @@
-import { Component, computed, inject, input, TemplateRef } from '@angular/core';
-import { CalendarCellRefContext, DateCell } from '../../types/ng-picker.types';
+import { Component, computed, inject, input } from '@angular/core';
 import { DateAdapter } from '../../adapters/date-adapter';
-import { MonthViewCell } from './month-view-cell/month-view-cell';
+import { DateCell } from '../../types/ng-picker.types';
 import { CalendarCellRef } from '../templates/calendar-cell-ref';
+import { MonthViewCell } from './month-view-cell/month-view-cell';
 
 @Component({
   selector: 'pk-month-view',
