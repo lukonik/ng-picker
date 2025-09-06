@@ -1,0 +1,29 @@
+/* Tailwind-themed variables for ng-picker
+   Apply by wrapping your datepicker with .pk-theme-tailwind or .pk-theme-tailwind-dark
+   Example:
+   <div class="pk-theme-tailwind"><pk-datepicker ...></pk-datepicker></div>
+*/
+
+/* Light theme using Tailwind palette (blue + slate) */
+pk-datepicker {
+  /* sizing */
+  --pk-date-size: 40px;
+  --pk-date-radius: 6px;
+
+  /* foregrounds */
+  --pk-fg: #0f172a; /* slate-900 */
+  --pk-fg-muted: #64748b; /* slate-500 */
+
+  /* surfaces */
+  --pk-bg-hover: rgba(15, 23, 42, 0.06); /* slate-900 @ 6% */
+
+  /* accents */
+  --pk-selected-bg: #2563eb; /* blue-600 */
+  --pk-selected-fg: #ffffff; /* white */
+  --pk-today-ring: #2563eb; /* blue-600 */
+
+  /* disabled */
+  --pk-disabled-fg: #94a3b8; /* slate-400 */
+}
+
+/* Dark theme variant using Tailwind palette */

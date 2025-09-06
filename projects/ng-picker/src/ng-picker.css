@@ -17,3 +17,70 @@ pk-datepicker button {
   line-height: inherit;
   text-align: inherit;
 }
+
+/* Theme tokens (defaults) scoped to component */
+pk-datepicker {
+  /* sizing */
+  --pk-date-size: 40px;
+  --pk-date-radius: 6px;
+
+  /* colors */
+  --pk-fg: #1a1a1a;
+  --pk-fg-muted: #757575;
+  --pk-bg-hover: rgba(0, 0, 0, 0.06);
+
+  --pk-selected-bg: #3f51b5;
+  --pk-selected-fg: #ffffff;
+
+  --pk-today-ring: #3f51b5;
+  --pk-disabled-fg: #bdbdbd;
+}
+
+/* Optional dark theme example */
+.pk-theme-dark pk-datepicker {
+  --pk-fg: #e6e6e6;
+  --pk-fg-muted: #a3a3a3;
+  --pk-bg-hover: rgba(255, 255, 255, 0.08);
+
+  --pk-selected-bg: #90caf9;
+  --pk-selected-fg: #0b0b0b;
+
+  --pk-today-ring: #90caf9;
+  --pk-disabled-fg: #6b6b6b;
+}
+
+/* Base date cell */
+.pk-picker-date-cell {
+  width: var(--pk-date-size);
+  height: var(--pk-date-size);
+  border-radius: var(--pk-date-radius);
+  display: inline-grid;
+  place-items: center;
+  color: var(--pk-fg);
+}
+
+/* Hover and focus */
+.pk-picker-date-cell:not(.pk-picker-date-cell--disabled):hover {
+  background: var(--pk-bg-hover);
+}
+.pk-picker-date-cell:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--pk-selected-bg), black 10%);
+  outline-offset: 2px;
+}
+
+/* Today */
+.pk-picker-date-cell--today {
+  box-shadow: inset 0 0 0 2px var(--pk-today-ring);
+}
+
+/* Selected */
+.pk-picker-date-cell--selected {
+  background: var(--pk-selected-bg);
+  color: var(--pk-selected-fg);
+}
+
+/* Disabled */
+.pk-picker-date-cell--disabled {
+  color: var(--pk-disabled-fg);
+  pointer-events: none;
+}

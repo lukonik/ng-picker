@@ -9,6 +9,11 @@
       "input": "src",
       "glob": "ng-picker.css",
       "output": "."
+    },
+    {
+      "input": "src/themes",
+      "glob": "*.css",
+      "output": "themes"
     }
   ]
 }
