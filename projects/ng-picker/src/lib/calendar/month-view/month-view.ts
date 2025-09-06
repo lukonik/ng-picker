@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, output } from '@angular/core';
 import { DateAdapter } from '../../adapters/date-adapter';
 import { DatepickerUtils } from '../../services/datepicker-utils';
-import { DateCell, DatepickerMode, DatepickerValue } from '../../types/ng-picker.types';
+import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../../types/ng-picker.types';
 import { CalendarCellRef } from '../templates/calendar-cell-ref';
 import { MonthViewCell } from './month-view-cell/month-view-cell';
 
@@ -23,8 +23,9 @@ export class MonthView<D> {
   disablePast = input.required<boolean>();
   disableFuture = input.required<boolean>();
   disableToday = input.required<boolean>();
-  minDate = input.required<D>();
-  maxDate = input.required<D>();
+  minDate = input<D>();
+  maxDate = input<D>();
+  filterDate = input<FilterDate<D>>();
 
   selectDate = output<DateCell<D>>();
 
@@ -63,6 +64,7 @@ export class MonthView<D> {
           this.today(),
           this.minDate(),
           this.maxDate(),
+          this.filterDate(),
         ),
       });
     }

@@ -1,6 +1,12 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { DateAdapter } from '../adapters/date-adapter';
-import { DateCell, DatepickerMode, DatepickerValue, ViewTypes } from '../types/ng-picker.types';
+import {
+  DateCell,
+  DatepickerMode,
+  DatepickerValue,
+  FilterDate,
+  ViewTypes,
+} from '../types/ng-picker.types';
 import { MonthView } from './month-view/month-view';
 import { CalendarCellRef } from './templates/calendar-cell-ref';
 
@@ -20,8 +26,9 @@ export class Calendar<D> {
   disablePast = input.required<boolean>();
   disableFuture = input.required<boolean>();
   disableToday = input.required<boolean>();
-  minDate = input.required<D>();
-  maxDate = input.required<D>();
+  minDate = input<D>();
+  maxDate = input<D>();
+  filterDate = input<FilterDate<D>>();
 
   view = signal<ViewTypes>(ViewTypes.Month);
   period = signal<D>(this._adapter.today());

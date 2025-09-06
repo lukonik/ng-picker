@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { DateAdapter } from '../../../ng-picker/src/lib/adapters/date-adapter';
 import { CalendarCellRef, Datepicker } from '../../../ng-picker/src/public-api';
 
 @Component({
@@ -10,4 +11,5 @@ import { CalendarCellRef, Datepicker } from '../../../ng-picker/src/public-api';
 })
 export class App {
   protected readonly title = signal('demo');
+  today = inject(DateAdapter).today();
 }

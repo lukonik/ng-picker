@@ -2,7 +2,7 @@ import { booleanAttribute, Component, contentChild, inject, input, signal } from
 import { Calendar } from '../calendar/calendar';
 import { CalendarCellRef } from '../calendar/templates/calendar-cell-ref';
 import { DatepickerUtils } from '../services/datepicker-utils';
-import { DateCell, DatepickerMode, DatepickerValue } from '../types/ng-picker.types';
+import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../types/ng-picker.types';
 
 @Component({
   selector: 'pk-datepicker',
@@ -23,6 +23,7 @@ export class Datepicker<D> {
   disableToday = input(false, { transform: booleanAttribute });
   minDate = input<D>();
   maxDate = input<D>();
+  filterDate = input<FilterDate<D>>();
 
   selectDate(cell: DateCell<D>) {
     this.value.set(this._datepickerUtils.selectDate(cell.date, this.value(), this.mode()));

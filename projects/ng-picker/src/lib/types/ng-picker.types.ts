@@ -25,3 +25,5 @@ export interface CalendarCellRefContext {
 }
 
 export type DatepickerValue<D> = D | null | D[] | { start: D | null; end: D | null };
+
+export type FilterDate<D> = (date: D) => boolean;

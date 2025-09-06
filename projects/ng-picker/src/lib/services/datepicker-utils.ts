@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { DateAdapter } from '../adapters/date-adapter';
-import { DatepickerMode, DatepickerValue } from '../types/ng-picker.types';
+import { DatepickerMode, DatepickerValue, FilterDate } from '../types/ng-picker.types';
 
 @Injectable()
 export class DatepickerUtils {
@@ -30,6 +30,7 @@ export class DatepickerUtils {
     today: D,
     min: D | undefined,
     max: D | undefined,
+    filterDate: FilterDate<D> | undefined,
   ): boolean {
     // Min/Max boundaries take precedence
     if (min && this._adapter.compareDate(date, min) < 0) {
@@ -50,6 +51,10 @@ export class DatepickerUtils {
       return true;
     }
     if (disableFuture && rel > 0) {
+      return true;
+    }
+    // Custom filter predicate: return true to allow, false to disable
+    if (filterDate && !filterDate(date)) {
       return true;
     }
     return false;
