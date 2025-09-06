@@ -7,6 +7,9 @@
       "projectType": "library",
       "root": "projects/ng-picker",
       "sourceRoot": "projects/ng-picker/src",
+      "schematics": {
+        "@schematics/angular:component": { "viewEncapsulation": "None" }
+      },
       "prefix": "pk",
       "architect": {
         "build": {
@@ -30,10 +33,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ng-picker/**/*.ts",
-              "projects/ng-picker/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/ng-picker/**/*.ts", "projects/ng-picker/**/*.html"],
             "eslintConfig": "projects/ng-picker/eslint.config.js"
           }
         }
@@ -57,9 +57,7 @@
                 "input": "projects/demo/public"
               }
             ],
-            "styles": [
-              "projects/demo/src/styles.css"
-            ]
+            "styles": ["projects/demo/src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -110,9 +108,7 @@
                 "input": "projects/demo/public"
               }
             ],
-            "styles": [
-              "projects/demo/src/styles.css"
-            ]
+            "styles": ["projects/demo/src/styles.css"]
           }
         }
       }

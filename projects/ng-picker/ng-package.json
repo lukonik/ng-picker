@@ -3,5 +3,12 @@
   "dest": "../../dist/ng-picker",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    {
+      "input": "src",
+      "glob": "ng-picker.css",
+      "output": "."
+    }
+  ]
 }
