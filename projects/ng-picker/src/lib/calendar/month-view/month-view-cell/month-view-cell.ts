@@ -1,6 +1,6 @@
-import { Component, input, TemplateRef } from '@angular/core';
-import { DateCell } from '../../../types/ng-picker.types';
 import { NgTemplateOutlet } from '@angular/common';
+import { Component, input, output } from '@angular/core';
+import { DateCell } from '../../../types/ng-picker.types';
 import { CalendarCellRef } from '../../templates/calendar-cell-ref';
 
 @Component({
@@ -9,7 +9,8 @@ import { CalendarCellRef } from '../../templates/calendar-cell-ref';
   templateUrl: './month-view-cell.html',
   styleUrl: './month-view-cell.css',
 })
-export class MonthViewCell {
-  cell = input.required<DateCell>();
+export class MonthViewCell<D> {
+  cell = input.required<DateCell<D>>();
   calendarCellRef = input<CalendarCellRef>();
+  selectDate = output<DateCell<D>>();
 }

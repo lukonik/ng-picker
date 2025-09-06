@@ -3,5 +3,13 @@
   [calendarCellRef]="calendarCellRef()"
   [period]="period()"
   [today]="today()"
+  [mode]="mode()"
+  [value]="value()"
+  (selectDate)="selectDate.emit($event)"
+  [disableFuture]="disableFuture()"
+  [disablePast]="disablePast()"
+  [disableToday]="disableToday()"
+  [minDate]="minDate()"
+  [maxDate]="maxDate()"
 ></pk-month-view>
 } }

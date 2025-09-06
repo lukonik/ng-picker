@@ -1,6 +1,7 @@
-@let _cell=cell(); @if(calendarCellRef();as _ref) {
-<ng-container *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"></ng-container>
-} @else{
-{{ _cell.displayValue }} {{ _cell.isToday ? '*' : '' }}
-
-}
+@let _cell=cell();
+<button [disabled]="_cell.isDisabled" (click)="selectDate.emit(cell())">
+  @if(calendarCellRef();as _ref) {
+  <ng-container *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"></ng-container>
+  } @else{
+  {{ _cell.displayValue }} {{ _cell.isToday ? '*' : '' }} {{ _cell.isSelected ? '✓' : '' }}}
+</button>

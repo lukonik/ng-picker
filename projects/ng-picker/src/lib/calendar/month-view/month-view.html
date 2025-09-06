@@ -10,7 +10,11 @@
   <tr>
     @for (cell of weekCell; track $index) {
     <td style="width: 40px">
-      <pk-month-view-cell [calendarCellRef]="calendarCellRef()" [cell]="cell"></pk-month-view-cell>
+      <pk-month-view-cell
+        (selectDate)="selectDate.emit($event)"
+        [calendarCellRef]="calendarCellRef()"
+        [cell]="cell"
+      ></pk-month-view-cell>
     </td>
     }
   </tr>

@@ -1,1 +1,11 @@
-<pk-calendar [calendarCellRef]="calendarCellRef()"></pk-calendar>
+<pk-calendar
+  [value]="value()"
+  [mode]="mode()"
+  [calendarCellRef]="calendarCellRef()"
+  (selectDate)="selectDate($event)"
+  [disableFuture]="disableFuture()"
+  [disablePast]="disablePast()"
+  [disableToday]="disableToday()"
+  [minDate]="minDate()"
+  [maxDate]="maxDate()"
+></pk-calendar>
