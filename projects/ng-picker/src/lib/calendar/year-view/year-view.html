@@ -1,1 +1,6 @@
-<p>year-view works!</p>
+<button (click)="changeView.emit('multi-year')">{{ currentYear() }}</button>
+<div class="year-grid">
+  @for (month of months(); track $index) {
+  <button (click)="changeView.emit('month')">{{ month.name }}</button>
+  }
+</div>

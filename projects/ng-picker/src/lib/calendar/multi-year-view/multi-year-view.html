@@ -1,1 +1,6 @@
 <p>multi-year-view works!</p>
+<div class="multi-year-grid">
+  @for (year of yearRanges(); track $index) {
+  <button>{{ year }}</button>
+  }
+</div>

@@ -1,4 +1,7 @@
 import { Component, computed, inject, input, output } from '@angular/core';
+import { Grid } from '../../a11y/grid/grid';
+import { GridCell } from '../../a11y/grid/grid-cell';
+import { GridRow } from '../../a11y/grid/grid-row';
 import { DateAdapter } from '../../adapters/date-adapter';
 import { DatepickerUtils } from '../../services/datepicker-utils';
 import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../../types/ng-picker.types';
@@ -7,13 +10,16 @@ import { MonthViewCell } from './month-view-cell/month-view-cell';
 
 @Component({
   selector: 'pk-month-view',
-  imports: [MonthViewCell],
+  imports: [MonthViewCell, Grid, GridCell, GridRow],
   templateUrl: './month-view.html',
   styleUrl: './month-view.css',
 })
 export class MonthView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
   private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);
+
+  goToNextMonth = output<void>();
+  goToPrevMonth = output<void>();
 
   period = input.required<D>();
   today = input.required<D>();

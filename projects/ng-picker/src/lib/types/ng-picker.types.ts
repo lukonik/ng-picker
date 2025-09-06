@@ -1,12 +1,6 @@
-export enum ViewTypes {
-  Month = 'month',
-  Year = 'year',
-  MultiYear = 'multi-year',
-}
+export type ViewTypes = 'month' | 'year' | 'multi-year';
 
-export enum DatepickerMode {
-  Single = 'single',
-}
+export type DatepickerMode = 'single';
 
 export interface DateCell<D> {
   value: number;

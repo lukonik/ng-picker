@@ -1,1 +1,5 @@
-<p>calendar-header works!</p>
+@switch (view()) { @case ('month') {
+<div>
+  <button (click)="changeView.emit('year')">{{ currentMonth() }}</button> {{ currentYear() }}
+</div>
+} }

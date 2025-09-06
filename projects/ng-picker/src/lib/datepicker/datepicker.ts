@@ -15,7 +15,7 @@ export class Datepicker<D> {
   private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);
 
   value = signal<DatepickerValue<D>>(null);
-  mode = input<DatepickerMode>(DatepickerMode.Single);
+  mode = input<DatepickerMode>('single');
   calendarCellRef = contentChild(CalendarCellRef);
 
   disablePast = input(false, { transform: booleanAttribute });
