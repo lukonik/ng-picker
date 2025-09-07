@@ -1,4 +1,5 @@
 <table
+  class="pk-picker-month-view"
   role="grid"
   pkGrid
   (goToDown)="goToNextMonth.emit()"
@@ -9,14 +10,14 @@
   <thead>
     <tr>
       @for (week of weekDays(); track $index) {
-      <th style="width: 40px; text-align: left">{{ week }}</th>
+      <th style="text-align: center">{{ week }}</th>
       }
     </tr>
   </thead>
   @for (weekCell of weekCells(); track $index) {
   <tr pkGridRow>
     @for (cell of weekCell; track $index) {
-    <td style="width: 40px">
+    <td style="text-align: center">
       <button
         pkGridCell
         class="pk-picker-date-cell"

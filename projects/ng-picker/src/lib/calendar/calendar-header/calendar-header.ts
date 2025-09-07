@@ -4,7 +4,6 @@ import { ViewTypes } from '../../types/ng-picker.types';
 
 @Component({
   selector: 'pk-calendar-header',
-  imports: [],
   templateUrl: './calendar-header.html',
   styleUrl: './calendar-header.css',
 })
