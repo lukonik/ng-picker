@@ -1,17 +1,10 @@
-<pk-calendar-header
-  (selectYear)="selectYear($event)"
-  (goToPrevMonth)="goToPrevMonth()"
-  (goToNextMonth)="goToNextMonth()"
-  [view]="view()"
-  [period]="period()"
-></pk-calendar-header>
-
 @switch (view()) { @case ('month') {
 <pk-month-view
   [calendarCellRef]="calendarCellRef()"
   [period]="period()"
   [today]="today()"
   [mode]="mode()"
+  (changeView)="changeView($event)"
   [value]="value()"
   (selectDate)="selectDate.emit($event)"
   [disableFuture]="disableFuture()"
@@ -26,5 +19,10 @@
 } @case ('year') {
 <pk-year-view (changeView)="changeView($event)" [period]="period()"></pk-year-view>
 } @case ('multi-year') {
-<pk-multi-year-view (selectYear)="selectYear($event)" [period]="period()"></pk-multi-year-view>
+<pk-multi-year-view
+  (goToPrevDecade)="goToPrevDecade()"
+  (goToNextDecade)="goToNextDecade()"
+  (selectYear)="selectYear($event)"
+  [period]="period()"
+></pk-multi-year-view>
 } }

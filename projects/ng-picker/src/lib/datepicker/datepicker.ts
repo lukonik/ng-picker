@@ -17,6 +17,9 @@ import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../types/
   imports: [Calendar],
   templateUrl: './datepicker.html',
   providers: [DatepickerUtils],
+  host: {
+    class: 'pk-datepicker',
+  },
 })
 export class Datepicker<D> {
   private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);

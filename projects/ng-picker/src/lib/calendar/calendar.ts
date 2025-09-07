@@ -32,7 +32,7 @@ export class Calendar<D> {
   maxDate = input<D>();
   filterDate = input<FilterDate<D>>();
 
-  view = signal<ViewTypes>('month');
+  view = signal<ViewTypes>('multi-year');
   period = signal<D>(this._adapter.today());
   today = signal<D>(this._adapter.today());
   calendarCellRef = input<CalendarCellRef>();
@@ -62,5 +62,14 @@ export class Calendar<D> {
     const newDate = this._adapter.createDate(year, month, 1);
     this.period.set(newDate);
     this.view.set('month');
+  }
+
+  goToNextDecade() {
+    const next = this._adapter.addCalendarYears(this.period(), 10);
+    this.period.set(next);
+  }
+  goToPrevDecade() {
+    const prev = this._adapter.addCalendarYears(this.period(), -10);
+    this.period.set(prev);
   }
 }

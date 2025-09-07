@@ -1,3 +1,35 @@
+<div class="pk-calendar-month-header">
+  <button class="pk-calendar-nav" (click)="goToPrevMonth.emit()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 -960 960 960"
+      width="24px"
+      fill="#1f1f1f"
+    >
+      <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+    </svg>
+  </button>
+  <div class="pk-calendar-month-header-current">
+    <button class="pk-calendar-month-header-current-year" (click)="changeView.emit('year')">
+      {{ currentMonth() }}
+    </button>
+    <button class="pk-calendar-month-header-current-month" (click)="changeView.emit('multi-year')">
+      {{ currentYear() }}
+    </button>
+  </div>
+  <button class="pk-calendar-nav" (click)="goToNextMonth.emit()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 -960 960 960"
+      width="24px"
+      fill="#1f1f1f"
+    >
+      <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+    </svg>
+  </button>
+</div>
 <table
   class="pk-picker-month-view"
   role="grid"

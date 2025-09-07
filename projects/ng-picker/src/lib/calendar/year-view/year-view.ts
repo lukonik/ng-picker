@@ -6,7 +6,6 @@ import { ViewTypes } from '../../types/ng-picker.types';
   selector: 'pk-year-view',
   imports: [],
   templateUrl: './year-view.html',
-  styleUrl: './year-view.css',
 })
 export class YearView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);

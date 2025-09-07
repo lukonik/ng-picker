@@ -1,5 +1,13 @@
-<p>multi-year-view works!</p>
-<div class="multi-year-grid">
+<div class="pk-picker-calendar-multi-year-header">
+  <button (click)="goToPrevDecade.emit()">
+    <pk-calendar-nav-icon prev></pk-calendar-nav-icon>
+  </button>
+  {{ fromYear() }} - {{ toYear() }}
+  <button (click)="goToNextDecade.emit()">
+    <pk-calendar-nav-icon></pk-calendar-nav-icon>
+  </button>
+</div>
+<div class="pk-picker-calendar-multi-year-grid">
   @for (year of yearRanges(); track $index) {
   <button (click)="selectYear.emit(year)">{{ year }}</button>
   }

@@ -4,7 +4,13 @@ import { GridCell } from '../../a11y/grid/grid-cell';
 import { GridRow } from '../../a11y/grid/grid-row';
 import { DateAdapter } from '../../adapters/date-adapter';
 import { DatepickerUtils } from '../../services/datepicker-utils';
-import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../../types/ng-picker.types';
+import {
+  DateCell,
+  DatepickerMode,
+  DatepickerValue,
+  FilterDate,
+  ViewTypes,
+} from '../../types/ng-picker.types';
 import { CalendarCellRef } from '../templates/calendar-cell-ref';
 import { MonthViewCell } from './month-view-cell/month-view-cell';
 
@@ -18,8 +24,14 @@ export class MonthView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
   private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);
 
-  goToNextMonth = output<void>();
-  goToPrevMonth = output<void>();
+  currentMonth = computed(() => {
+    const month = this._adapter.getMonth(this.period());
+    return this._adapter.getMonthNames('long')[month];
+  });
+
+  currentYear = computed(() => {
+    return this._adapter.getYear(this.period());
+  });
 
   period = input.required<D>();
   today = input.required<D>();
@@ -34,6 +46,9 @@ export class MonthView<D> {
   filterDate = input<FilterDate<D>>();
 
   selectDate = output<DateCell<D>>();
+  changeView = output<ViewTypes>();
+  goToNextMonth = output<void>();
+  goToPrevMonth = output<void>();
 
   weekDays = computed(() => {
     const names = this._adapter.getDayOfWeekNames('short');

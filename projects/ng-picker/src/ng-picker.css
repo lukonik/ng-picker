@@ -2,7 +2,17 @@
    This file ships with the library and can be imported
    by consumers in their global styles.
 */
+@import './styles/datepicker.css';
 @import './styles/month-view.css';
+@import './styles/year-view.css';
+@import './styles/multi-year.css';
+@import './styles/calendar.css';
+
+:root {
+  --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
+  --pk-picker-datepicker-border: oklch(92.8% 0.006 264.531);
+  --pk-picker-datepicker-border-radius: 12px;
+}
 
 pk-datepicker {
   display: block;

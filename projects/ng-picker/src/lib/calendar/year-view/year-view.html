@@ -1,6 +1,12 @@
-<button (click)="changeView.emit('multi-year')">{{ currentYear() }}</button>
-<div class="year-grid">
+<div class="pk-picker-calendar-year-header">
+  <button class="pk-picker-calendar-year-select-year" (click)="changeView.emit('multi-year')">
+    {{ currentYear() }}
+  </button>
+</div>
+<div class="pk-picker-calendar-year-grid">
   @for (month of months(); track $index) {
-  <button (click)="changeView.emit('month')">{{ month.name }}</button>
+  <button class="pk-picker-calendar-year-select-month" (click)="changeView.emit('month')">
+    {{ month.name }}
+  </button>
   }
 </div>

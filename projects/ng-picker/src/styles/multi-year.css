@@ -1,0 +1,31 @@
+.pk-picker-calendar-multi-year-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0px;
+}
+
+.pk-picker-calendar-multi-year-select-multi-year {
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  &:hover {
+    background: var(--pk-picker-bg-hover);
+  }
+}
+
+.pk-picker-calendar-multi-year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.pk-picker-calendar-multi-year-select-month {
+  padding: 4px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+  &:hover {
+    background: var(--pk-picker-bg-hover);
+  }
+}
