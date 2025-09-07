@@ -1,4 +1,8 @@
-<pk-calendar-header [view]="view()" [period]="period()"></pk-calendar-header>
+<pk-calendar-header
+  (selectYear)="selectYear($event)"
+  [view]="view()"
+  [period]="period()"
+></pk-calendar-header>
 
 @switch (view()) { @case ('month') {
 <pk-month-view
@@ -20,5 +24,5 @@
 } @case ('year') {
 <pk-year-view (changeView)="changeView($event)" [period]="period()"></pk-year-view>
 } @case ('multi-year') {
-<pk-multi-year-view [period]="period()"></pk-multi-year-view>
+<pk-multi-year-view (selectYear)="selectYear($event)" [period]="period()"></pk-multi-year-view>
 } }

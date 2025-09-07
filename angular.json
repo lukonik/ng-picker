@@ -8,7 +8,7 @@
       "root": "projects/ng-picker",
       "sourceRoot": "projects/ng-picker/src",
       "schematics": {
-        "@schematics/angular:component": { "viewEncapsulation": "None" }
+        "@schematics/angular:component": { "viewEncapsulation": "None", "inlineStyle": true }
       },
       "prefix": "pk",
       "architect": {

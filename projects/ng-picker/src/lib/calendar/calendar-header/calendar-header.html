@@ -1,5 +1,6 @@
 @switch (view()) { @case ('month') {
-<div>
-  <button (click)="changeView.emit('year')">{{ currentMonth() }}</button> {{ currentYear() }}
+<div class="pk-calendar-header">
+  <button (click)="changeView.emit('year')">{{ currentMonth() }}</button>
+  <button (click)="selectYear.emit(currentYear())">{{ currentYear() }}</button>
 </div>
 } }

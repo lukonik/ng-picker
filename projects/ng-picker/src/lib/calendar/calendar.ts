@@ -17,7 +17,6 @@ import { YearView } from './year-view/year-view';
   selector: 'pk-calendar',
   imports: [MonthView, CalendarHeader, YearView, MultiYearView],
   templateUrl: './calendar.html',
-  styleUrl: './calendar.css',
 })
 export class Calendar<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
@@ -33,7 +32,7 @@ export class Calendar<D> {
   maxDate = input<D>();
   filterDate = input<FilterDate<D>>();
 
-  view = signal<ViewTypes>('year');
+  view = signal<ViewTypes>('month');
   period = signal<D>(this._adapter.today());
   today = signal<D>(this._adapter.today());
   calendarCellRef = input<CalendarCellRef>();
@@ -49,5 +48,19 @@ export class Calendar<D> {
 
   changeView(view: ViewTypes) {
     this.view.set(view);
+  }
+
+  selectYear(year: number) {
+    const currentMonth = this._adapter.getMonth(this.period());
+    const newDate = this._adapter.createDate(year, currentMonth, 1);
+    this.period.set(newDate);
+    this.view.set('year');
+  }
+
+  selectMonth(month: number) {
+    const year = this._adapter.getYear(this.period());
+    const newDate = this._adapter.createDate(year, month, 1);
+    this.period.set(newDate);
+    this.view.set('month');
   }
 }

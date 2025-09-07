@@ -8,7 +8,6 @@ import { DateCell, DatepickerMode, DatepickerValue, FilterDate } from '../types/
   selector: 'pk-datepicker',
   imports: [Calendar],
   templateUrl: './datepicker.html',
-  styleUrl: './datepicker.css',
   providers: [DatepickerUtils],
 })
 export class Datepicker<D> {

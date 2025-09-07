@@ -3,6 +3,10 @@
    by consumers in their global styles.
 */
 
+pk-datepicker {
+  display: block;
+}
+
 /* Button reset under pk-datepicker: remove UA defaults without adding a look */
 pk-datepicker button {
   appearance: none;

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { DateAdapter } from '../../adapters/date-adapter';
 
 @Component({
@@ -10,6 +10,7 @@ import { DateAdapter } from '../../adapters/date-adapter';
 export class MultiYearView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
   period = input.required<D>();
+  selectYear = output<number>();
 
   yearRanges = computed(() => {
     const year = this._adapter.getYear(this.period());
