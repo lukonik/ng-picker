@@ -22,4 +22,12 @@
     background: lightblue;
     color: white;
   }
+
+  &.pk-picker-day-cell-in-range {
+    background: aquamarine;
+  }
+
+  &.pk-picker-day-cell-in-hover-range {
+    background: antiquewhite;
+  }
 }

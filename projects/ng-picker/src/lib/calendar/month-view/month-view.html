@@ -21,6 +21,7 @@
       <button
         pkGridCell
         class="pk-picker-day-cell"
+        [class.pk-picker-day-cell-in-range]="cell.isInRange"
         [class.pk-picker-day-cell-selected]="cell.isSelected"
         [class.pk-day-cell-today]="cell.isToday"
         [disabled]="cell.isDisabled"

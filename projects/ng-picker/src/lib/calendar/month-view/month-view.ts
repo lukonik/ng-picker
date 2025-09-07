@@ -58,7 +58,7 @@ export class MonthView<D> {
         value: day,
         displayValue: display,
         isToday: isToday,
-        isInRange: false,
+        isInRange: this._datepickerUtils.isInRange(date, this.value(), this.mode()),
         isSelected: this._datepickerUtils.isSelected(date, this.value(), this.mode()),
         date: date,
         empty: false,

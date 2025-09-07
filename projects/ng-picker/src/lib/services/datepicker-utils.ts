@@ -17,6 +17,32 @@ export class DatepickerUtils {
     }
   }
 
+  // Returns true only for dates strictly between start and end in range mode.
+  // For 'single' and 'multi' modes, always false.
+  isInRange<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
+    if (mode !== 'range') {
+      return false;
+    }
+    if (!value || Array.isArray(value) || typeof value !== 'object') {
+      return false;
+    }
+    const { start, end } = value as { start: D | null; end: D | null };
+    if (!start || !end) {
+      return false;
+    }
+    // Exclude endpoints; those are handled by isSelectedInRange
+    if (this._adapter.sameDate(date, start) || this._adapter.sameDate(date, end)) {
+      return false;
+    }
+    // Ensure correct order even if externally provided out-of-order
+    const startFirst = this._adapter.compareDate(start, end) <= 0 ? start : end;
+    const endLast = this._adapter.compareDate(start, end) <= 0 ? end : start;
+    return (
+      this._adapter.compareDate(date, startFirst) > 0 &&
+      this._adapter.compareDate(date, endLast) < 0
+    );
+  }
+
   private isSelectedInMulti<D>(date: D, value: DatepickerValue<D>) {
     if (Array.isArray(value)) {
       const arr = value as D[];
