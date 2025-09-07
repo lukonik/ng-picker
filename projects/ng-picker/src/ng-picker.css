@@ -62,23 +62,6 @@ pk-datepicker {
     }
   }
 
-  .pk-day-cell {
-    height: 32px;
-    width: 32px;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    &:hover {
-      background: var(--pk-picker-bg-hover);
-    }
-
-    &.pk-day-cell-today {
-      border: 1px solid oklch(27.8% 0.033 256.848);
-    }
-  }
-
   /* Button reset under pk-datepicker: remove UA defaults without adding a look */
 
   /* Base date cell */

@@ -1,14 +1,4 @@
-@let _cell=cell();
-<button
-  class="pk-day-cell"
-  [class.pk-day-cell-today]="_cell.isToday"
-  [class.pk-picker-date-cell--selected]="_cell.isSelected"
-  [class.pk-picker-date-cell--disabled]="_cell.isDisabled"
-  [disabled]="_cell.isDisabled"
-  (click)="selectDate.emit(cell())"
->
-  @if(calendarCellRef();as _ref) {
-  <ng-container *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"></ng-container>
-  } @else{
-  {{ _cell.displayValue }} }
-</button>
+@let _cell=cell(); @if(calendarCellRef();as _ref) {
+<ng-container *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"></ng-container>
+} @else{
+{{ _cell.displayValue }} }

@@ -1,4 +1,12 @@
-import { booleanAttribute, Component, contentChild, inject, input, signal } from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  contentChild,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { Calendar } from '../calendar/calendar';
 import { CalendarCellRef } from '../calendar/templates/calendar-cell-ref';
 import { DatepickerUtils } from '../services/datepicker-utils';
@@ -23,6 +31,12 @@ export class Datepicker<D> {
   minDate = input<D>();
   maxDate = input<D>();
   filterDate = input<FilterDate<D>>();
+
+  constructor() {
+    effect(() => {
+      console.log(this.value());
+    });
+  }
 
   selectDate(cell: DateCell<D>) {
     this.value.set(this._datepickerUtils.selectDate(cell.date, this.value(), this.mode()));

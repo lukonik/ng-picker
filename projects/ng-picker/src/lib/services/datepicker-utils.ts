@@ -7,7 +7,20 @@ export class DatepickerUtils {
   private _adapter = inject<DateAdapter<unknown>>(DateAdapter);
 
   isSelected<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
-    return this.isSelectedInSingle(date, value);
+    switch (mode) {
+      case 'single':
+        return this.isSelectedInSingle(date, value);
+      case 'multi':
+        return this.isSelectedInMulti(date, value);
+    }
+  }
+
+  private isSelectedInMulti<D>(date: D, value: DatepickerValue<D>) {
+    if (Array.isArray(value)) {
+      const arr = value as D[];
+      return arr.some((v) => this._adapter.sameDate(date, v));
+    }
+    return false;
   }
 
   private isSelectedInSingle<D>(date: D, value: DatepickerValue<D>) {
@@ -15,10 +28,24 @@ export class DatepickerUtils {
   }
 
   selectDate<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): DatepickerValue<D> {
-    return this.selectDateInSingle(date, value);
+    switch (mode) {
+      case 'single':
+        return this.selectDateInSingle(date);
+      case 'multi':
+        return this.selectDateInMulti(date, value);
+    }
   }
 
-  private selectDateInSingle<D>(date: D, _value: DatepickerValue<D>): D {
+  private selectDateInMulti<D>(date: D, value: DatepickerValue<D>): D[] {
+    const current = Array.isArray(value) ? (value as D[]) : [];
+    const exists = current.some((v) => this._adapter.sameDate(v, date));
+    if (exists) {
+      return current.filter((v) => !this._adapter.sameDate(v, date));
+    }
+    return [...current, date];
+  }
+
+  private selectDateInSingle<D>(date: D): D {
     return date;
   }
 

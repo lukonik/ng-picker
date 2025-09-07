@@ -1,3 +1,25 @@
 .pk-picker-month-view {
   width: 100%;
 }
+
+.pk-picker-day-cell {
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &:hover {
+    background: var(--pk-picker-bg-hover);
+  }
+
+  &.pk-picker-day-cell-today {
+    border: 1px solid oklch(27.8% 0.033 256.848);
+  }
+
+  &.pk-picker-day-cell-selected {
+    background: lightblue;
+    color: white;
+  }
+}

@@ -20,15 +20,13 @@
     <td style="text-align: center">
       <button
         pkGridCell
-        class="pk-picker-date-cell"
-        [class.pk-picker-date-cell--today]="cell.isToday"
-        [class.pk-picker-date-cell--selected]="cell.isSelected"
-        [class.pk-picker-date-cell--disabled]="cell.isDisabled"
+        class="pk-picker-day-cell"
+        [class.pk-picker-day-cell-selected]="cell.isSelected"
+        [class.pk-day-cell-today]="cell.isToday"
         [disabled]="cell.isDisabled"
         (click)="selectDate.emit(cell)"
       >
         <pk-month-view-cell
-          (selectDate)="selectDate.emit($event)"
           [calendarCellRef]="calendarCellRef()"
           [cell]="cell"
         ></pk-month-view-cell>
