@@ -12,6 +12,8 @@ export class DatepickerUtils {
         return this.isSelectedInSingle(date, value);
       case 'multi':
         return this.isSelectedInMulti(date, value);
+      case 'range':
+        return this.isSelectedInRange(date, value);
     }
   }
 
@@ -27,12 +29,26 @@ export class DatepickerUtils {
     return value != null && this._adapter.sameDate(date, value as D);
   }
 
+  private isSelectedInRange<D>(date: D, value: DatepickerValue<D>) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      const range = value as { start: D | null; end: D | null };
+      const isStart = !!range.start && this._adapter.sameDate(date, range.start);
+      const isEnd = !!range.end && this._adapter.sameDate(date, range.end);
+      return isStart || isEnd;
+    }
+    return false;
+  }
+
   selectDate<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): DatepickerValue<D> {
     switch (mode) {
       case 'single':
         return this.selectDateInSingle(date);
       case 'multi':
         return this.selectDateInMulti(date, value);
+      case 'range':
+        return this.selectDateInRange(date, value);
+      default:
+        return value;
     }
   }
 
@@ -47,6 +63,39 @@ export class DatepickerUtils {
 
   private selectDateInSingle<D>(date: D): D {
     return date;
+  }
+
+  private selectDateInRange<D>(
+    date: D,
+    value: DatepickerValue<D>,
+  ): { start: D | null; end: D | null } {
+    let start: D | null = null;
+    let end: D | null = null;
+
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      const v = value as { start: D | null; end: D | null };
+      start = v.start ?? null;
+      end = v.end ?? null;
+    }
+
+    // If a complete range exists or nothing is selected, start a new range with the clicked date
+    if ((start && end) || (!start && !end)) {
+      return { start: date, end: null };
+    }
+
+    // If only start is set, set end; if picked date is before start, reset start
+    if (start && !end) {
+      const cmp = this._adapter.compareDate(date, start);
+      if (cmp < 0) {
+        // New click is earlier than start: reset start and keep selecting
+        return { start: date, end: null };
+      }
+      // cmp >= 0: same day or after → make single or forward range
+      return { start, end: date };
+    }
+
+    // Fallback
+    return { start: date, end: null };
   }
 
   isDateDisabled<D>(

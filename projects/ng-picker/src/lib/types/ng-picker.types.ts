@@ -1,6 +1,6 @@
 export type ViewTypes = 'month' | 'year' | 'multi-year';
 
-export type DatepickerMode = 'single' | 'multi';
+export type DatepickerMode = 'single' | 'multi' | 'range';
 
 export interface DateCell<D> {
   value: number;
