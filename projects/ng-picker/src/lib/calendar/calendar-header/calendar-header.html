@@ -1,6 +1,6 @@
 @switch (view()) { @case ('month') {
 <div class="pk-calendar-month-header">
-  <button class="pk-calendar-nav">
+  <button class="pk-calendar-nav" (click)="goToPrevMonth.emit()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="24px"
@@ -19,7 +19,7 @@
       {{ currentYear() }}
     </button>
   </div>
-  <button class="pk-calendar-nav">
+  <button class="pk-calendar-nav" (click)="goToNextMonth.emit()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="24px"

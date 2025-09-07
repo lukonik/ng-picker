@@ -13,6 +13,8 @@ export class CalendarHeader<D> {
   period = input.required<D>();
   changeView = output<ViewTypes>();
   selectYear = output<number>();
+  goToNextMonth = output<void>();
+  goToPrevMonth = output<void>();
 
   currentMonth = computed(() => {
     const month = this._adapter.getMonth(this.period());

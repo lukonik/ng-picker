@@ -1,5 +1,7 @@
 <pk-calendar-header
   (selectYear)="selectYear($event)"
+  (goToPrevMonth)="goToPrevMonth()"
+  (goToNextMonth)="goToNextMonth()"
   [view]="view()"
   [period]="period()"
 ></pk-calendar-header>

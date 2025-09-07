@@ -78,11 +78,16 @@ export class MonthView<D> {
     return cells;
   });
 
+  // Helper for template loops over pad counts
+  pad(count: number): number[] {
+    return Array.from({ length: count }, (_, i) => i);
+  }
+
   weekCells = computed(() => {
     const period = this.period();
-    const cells = this.cells();
+    const monthCells = this.cells();
 
-    // Determine how many blanks to pad before the 1st of the month
+    // Determine leading pad for the first week based on locale first day
     const firstDayOfWeek = this._adapter.getFirstDayOfWeek();
     const firstOfMonth = this._adapter.createDate(
       this._adapter.getYear(period),
@@ -90,32 +95,25 @@ export class MonthView<D> {
       1,
     );
     const firstDow = this._adapter.getDayOfWeek(firstOfMonth);
-    const leadingBlanks = (7 + firstDow - firstDayOfWeek) % 7;
+    const leadingPad = (7 + firstDow - firstDayOfWeek) % 7;
 
-    const blankCell: DateCell<D> = {
-      value: 0,
-      displayValue: '',
-      isToday: false,
-      isSelected: false,
-      isInRange: false,
-      date: this.today(), // Just needs a valid date, won't be used.
-      empty: true,
-      isDisabled: true,
-    };
-    const paddedStart: DateCell<D>[] = Array.from({ length: leadingBlanks }, () => blankCell);
-    const startPadded = [...paddedStart, ...cells];
+    const result: { startPad: number; cells: DateCell<D>[]; endPad: number }[] = [];
+    const totalWithPad = leadingPad + monthCells.length;
+    const weekCount = Math.ceil(totalWithPad / 7);
 
-    // Pad the end so the total count is a multiple of 7
-    const trailingBlanks = (7 - (startPadded.length % 7)) % 7;
-    const paddedEnd: DateCell<D>[] = Array.from({ length: trailingBlanks }, () => blankCell);
-    const full = [...startPadded, ...paddedEnd];
+    let idx = 0;
+    for (let w = 0; w < weekCount; w++) {
+      const startPad = w === 0 ? leadingPad : 0;
+      const capacity = 7 - startPad;
+      const slice = monthCells.slice(idx, idx + capacity);
+      idx += slice.length;
 
-    // Chunk into weeks (rows of 7)
-    const weeks: DateCell<D>[][] = [];
-    for (let i = 0; i < full.length; i += 7) {
-      weeks.push(full.slice(i, i + 7));
+      const isLast = w === weekCount - 1;
+      const endPad = isLast ? Math.max(0, 7 - (startPad + slice.length)) : 0;
+
+      result.push({ startPad, cells: slice, endPad });
     }
 
-    return weeks;
+    return result;
   });
 }

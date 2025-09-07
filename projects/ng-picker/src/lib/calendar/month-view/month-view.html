@@ -14,16 +14,20 @@
       }
     </tr>
   </thead>
-  @for (weekCell of weekCells(); track $index) {
+  @for (week of weekCells(); track $index) {
   <tr pkGridRow>
-    @for (cell of weekCell; track $index) {
+    @for (_ of pad(week.startPad); track $index) {
+    <td style="text-align: center">
+      <button disabled aria-hidden="true"></button>
+    </td>
+    } @for (cell of week.cells; track $index) {
     <td style="text-align: center">
       <button
         pkGridCell
         class="pk-picker-day-cell"
-        [class.pk-picker-day-cell-in-range]="cell.isInRange"
         [class.pk-picker-day-cell-selected]="cell.isSelected"
         [class.pk-day-cell-today]="cell.isToday"
+        [class.pk-picker-day-cell-in-range]="cell.isInRange"
         [disabled]="cell.isDisabled"
         (click)="selectDate.emit(cell)"
       >
@@ -32,6 +36,10 @@
           [cell]="cell"
         ></pk-month-view-cell>
       </button>
+    </td>
+    } @for (_ of pad(week.endPad); track $index) {
+    <td style="text-align: center">
+      <button disabled aria-hidden="true"></button>
     </td>
     }
   </tr>
