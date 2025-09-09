@@ -5,27 +5,34 @@
   padding: 6px 0px;
 }
 
-.pk-picker-calendar-multi-year-select-multi-year {
-  padding: 4px;
-  cursor: pointer;
-  border-radius: 6px;
-  &:hover {
-    background: var(--pk-picker-bg-hover);
-  }
-}
-
 .pk-picker-calendar-multi-year-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
-.pk-picker-calendar-multi-year-select-month {
-  padding: 4px;
+/* Year cell styles */
+.pk-picker-calendar-multi-year-select-year {
+  padding: 6px 8px;
   cursor: pointer;
   text-align: center;
   border-radius: 6px;
-  &:hover {
-    background: var(--pk-picker-bg-hover);
-  }
+  color: var(--pk-picker-fg);
+  background: transparent;
+  display: inline-grid;
+  place-items: center;
+}
+.pk-picker-calendar-multi-year-select-year:hover {
+  background: var(--pk-picker-bg-hover);
+}
+.pk-picker-calendar-multi-year-select-year:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--pk-picker-selected-bg), black 10%);
+  outline-offset: 2px;
+}
+.pk-picker-calendar-multi-year-select-year.pk-picker-selected {
+  background: var(--pk-picker-selected-bg);
+  color: var(--pk-picker-selected-fg);
+}
+.pk-picker-calendar-multi-year-select-year.pk-picker-current {
+  box-shadow: inset 0 0 0 2px var(--pk-picker-today-ring);
 }

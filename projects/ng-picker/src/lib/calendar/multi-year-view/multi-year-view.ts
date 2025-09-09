@@ -6,7 +6,6 @@ import { CalendarNavIcon } from '../calendar-nav-icon/calendar-nav-icon';
   selector: 'pk-multi-year-view',
   imports: [CalendarNavIcon, CalendarNavIcon],
   templateUrl: './multi-year-view.html',
-  styleUrl: './multi-year-view.css',
 })
 export class MultiYearView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
@@ -14,6 +13,11 @@ export class MultiYearView<D> {
   selectYear = output<number>();
   goToNextDecade = output<void>();
   goToPrevDecade = output<void>();
+
+  // Selected year corresponds to the current period's year
+  selectedYear = computed(() => this._adapter.getYear(this.period()));
+  // Today's calendar year for subtle highlight
+  todayYear = computed(() => this._adapter.getYear(this._adapter.today()));
 
   yearRanges = computed(() => {
     const fromYear = this.fromYear();

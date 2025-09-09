@@ -5,7 +5,12 @@
 </div>
 <div class="pk-picker-calendar-year-grid">
   @for (month of months(); track $index) {
-  <button class="pk-picker-calendar-year-select-month" (click)="changeView.emit('month')">
+  <button
+    class="pk-picker-calendar-year-select-month"
+    [class.pk-picker-selected]="month.index === selectedMonth()"
+    [class.pk-picker-current]="currentYear() === todayYear() && month.index === todayMonth()"
+    (click)="changeView.emit('month')"
+  >
     {{ month.name }}
   </button>
   }

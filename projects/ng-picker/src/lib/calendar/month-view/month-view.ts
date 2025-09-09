@@ -51,10 +51,13 @@ export class MonthView<D> {
   goToPrevMonth = output<void>();
 
   weekDays = computed(() => {
-    const names = this._adapter.getDayOfWeekNames('short');
+    const short = this._adapter.getDayOfWeekNames('short');
+    const long = this._adapter.getDayOfWeekNames('long');
     const first = this._adapter.getFirstDayOfWeek();
-    // Reorder weekday names to start from locale's first day
-    return [...names.slice(first), ...names.slice(0, first)];
+    const reorder = <T>(arr: T[]) => [...arr.slice(first), ...arr.slice(0, first)];
+    const rShort = reorder(short);
+    const rLong = reorder(long);
+    return rShort.map((s, i) => ({ short: s, long: rLong[i] }));
   });
 
   cells = computed(() => {

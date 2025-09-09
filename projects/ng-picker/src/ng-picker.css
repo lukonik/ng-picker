@@ -10,22 +10,28 @@
 
 /* Default tokens (light) */
 :root {
+  /* Brand primary (Tailwind slate-900) */
+  --pk-picker-primary: #0f172a;
+
   /* Base colors */
   --pk-picker-fg: oklch(28% 0.03 260);
   --pk-picker-disabled-fg: oklch(60% 0.02 260);
   --pk-picker-bg: white;
   --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
   --pk-picker-border: oklch(92.8% 0.006 264.531);
-  --pk-picker-icon-fg: oklch(28% 0.03 260);
+  --pk-picker-icon-fg: var(--pk-picker-primary);
 
   /* Date cells */
   --pk-picker-date-size: 32px;
   --pk-picker-date-radius: 9999px;
-  --pk-picker-selected-bg: oklch(65% 0.11 250);
+  --pk-picker-selected-bg: var(--pk-picker-primary);
   --pk-picker-selected-fg: white;
-  --pk-picker-range-bg: oklch(90% 0.02 260);
-  --pk-picker-hover-range-bg: oklch(95% 0.01 260);
-  --pk-picker-today-ring: oklch(27.8% 0.033 256.848);
+  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary) 10%, white);
+  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary) 5%, white);
+  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 75%);
+
+  /** Weekday cell **/
+  --pk-picker-weekday-cell: oklch(27.8% 0.033 256.848);
 
   /* Datepicker panel */
   --pk-picker-datepicker-border: var(--pk-picker-border);
@@ -35,17 +41,13 @@
 /* Optional theme containers */
 .pk-picker-theme-light {
   color: var(--pk-picker-fg);
-  --pk-picker-fg: oklch(28% 0.03 260);
-  --pk-picker-disabled-fg: oklch(60% 0.02 260);
-  --pk-picker-bg: white;
-  --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
-  --pk-picker-border: oklch(92.8% 0.006 264.531);
-  --pk-picker-icon-fg: oklch(28% 0.03 260);
-  --pk-picker-selected-bg: oklch(65% 0.11 250);
+  /* keep primary same as :root */
+  --pk-picker-icon-fg: var(--pk-picker-primary);
+  --pk-picker-selected-bg: var(--pk-picker-primary);
   --pk-picker-selected-fg: white;
-  --pk-picker-range-bg: oklch(90% 0.02 260);
-  --pk-picker-hover-range-bg: oklch(95% 0.01 260);
-  --pk-picker-today-ring: oklch(27.8% 0.033 256.848);
+  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary) 10%, white);
+  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary) 5%, white);
+  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 75%);
 }
 
 .pk-picker-theme-dark {
@@ -55,12 +57,14 @@
   --pk-picker-bg: oklch(22% 0.03 260);
   --pk-picker-bg-hover: oklch(28% 0.03 260);
   --pk-picker-border: oklch(30% 0.02 260);
-  --pk-picker-icon-fg: oklch(92% 0.02 260);
-  --pk-picker-selected-bg: oklch(70% 0.11 250);
+  /* use readable icon color in dark */
+  --pk-picker-icon-fg: var(--pk-picker-fg);
+  /* derive selected from primary but lighter for contrast */
+  --pk-picker-selected-bg: color-mix(in oklab, var(--pk-picker-primary), white 70%);
   --pk-picker-selected-fg: black;
-  --pk-picker-range-bg: oklch(35% 0.02 260);
-  --pk-picker-hover-range-bg: oklch(32% 0.02 260);
-  --pk-picker-today-ring: oklch(80% 0.05 256.848);
+  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary), white 85%);
+  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary), white 90%);
+  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 65%);
 }
 
 pk-datepicker {

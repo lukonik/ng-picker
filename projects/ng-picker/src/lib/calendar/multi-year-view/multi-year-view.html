@@ -1,14 +1,21 @@
 <div class="pk-picker-calendar-multi-year-header">
-  <button (click)="goToPrevDecade.emit()">
+  <button class="pk-picker-calendar-nav" (click)="goToPrevDecade.emit()">
     <pk-calendar-nav-icon prev></pk-calendar-nav-icon>
   </button>
   {{ fromYear() }} - {{ toYear() }}
-  <button (click)="goToNextDecade.emit()">
+  <button class="pk-picker-calendar-nav" (click)="goToNextDecade.emit()">
     <pk-calendar-nav-icon></pk-calendar-nav-icon>
   </button>
 </div>
 <div class="pk-picker-calendar-multi-year-grid">
   @for (year of yearRanges(); track $index) {
-  <button (click)="selectYear.emit(year)">{{ year }}</button>
+  <button
+    class="pk-picker-calendar-multi-year-select-year"
+    [class.pk-picker-selected]="year === selectedYear()"
+    [class.pk-picker-current]="year === todayYear()"
+    (click)="selectYear.emit(year)"
+  >
+    {{ year }}
+  </button>
   }
 </div>

@@ -23,4 +23,10 @@ export class YearView<D> {
       index,
     }));
   });
+
+  // Selected month is taken from the current period
+  selectedMonth = computed(() => this._adapter.getMonth(this.period()));
+  // Today helpers for subtle highlight when viewing the current year
+  todayYear = computed(() => this._adapter.getYear(this._adapter.today()));
+  todayMonth = computed(() => this._adapter.getMonth(this._adapter.today()));
 }

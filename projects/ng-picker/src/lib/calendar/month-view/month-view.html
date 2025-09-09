@@ -14,7 +14,10 @@
     <button class="pk-picker-calendar-month-header-current-year" (click)="changeView.emit('year')">
       {{ currentMonth() }}
     </button>
-    <button class="pk-picker-calendar-month-header-current-month" (click)="changeView.emit('multi-year')">
+    <button
+      class="pk-picker-calendar-month-header-current-month"
+      (click)="changeView.emit('multi-year')"
+    >
       {{ currentYear() }}
     </button>
   </div>
@@ -42,18 +45,20 @@
   <thead>
     <tr>
       @for (week of weekDays(); track $index) {
-      <th style="text-align: center">{{ week }}</th>
+      <th class="pk-picker-weekday-cell" aria-label="{{ week.long }}">
+        {{ week.short }}
+      </th>
       }
     </tr>
   </thead>
   @for (week of weekCells(); track $index) {
   <tr pkGridRow>
     @for (_ of pad(week.startPad); track $index) {
-    <td style="text-align: center">
+    <td>
       <button disabled aria-hidden="true"></button>
     </td>
     } @for (cell of week.cells; track $index) {
-    <td style="text-align: center">
+    <td>
       <button
         pkGridCell
         class="pk-picker-day-cell"
@@ -72,7 +77,7 @@
       </button>
     </td>
     } @for (_ of pad(week.endPad); track $index) {
-    <td style="text-align: center">
+    <td>
       <button disabled aria-hidden="true"></button>
     </td>
     }
