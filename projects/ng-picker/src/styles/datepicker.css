@@ -1,4 +1,5 @@
 .pk-picker-datepicker {
-  border: 1px solid var(--pk-picker-datepicker-border);
-  border-radius: var(--pk-picker-datepicker-border-radius);
+  border: 1px solid var(--pk-datepicker-border);
+  border-radius: var(--pk-datepicker-border-radius);
+  padding: var(--pk-datepicker-padding);
 }

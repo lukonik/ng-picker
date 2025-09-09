@@ -1,19 +1,17 @@
 <ng-template cdkPortal #pickerPortal="cdkPortal">
-  <div class="pk-picker-datepicker">
-    <pk-calendar
-      [value]="value()"
-      [mode]="mode()"
-      [startView]="startView()"
-      [calendarCellRef]="calendarCellRef()"
-      (selectDate)="selectDate($event)"
-      [disableFuture]="disableFuture()"
-      [disablePast]="disablePast()"
-      [disableToday]="disableToday()"
-      [minDate]="minDate()"
-      [maxDate]="maxDate()"
-      [filterDate]="filterDate()"
-    ></pk-calendar>
-  </div>
+  <pk-calendar
+    [value]="value()"
+    [mode]="mode()"
+    [startView]="startView()"
+    [calendarCellRef]="calendarCellRef()"
+    (selectDate)="selectDate($event)"
+    [disableFuture]="disableFuture()"
+    [disablePast]="disablePast()"
+    [disableToday]="disableToday()"
+    [minDate]="minDate()"
+    [maxDate]="maxDate()"
+    [filterDate]="filterDate()"
+  ></pk-calendar>
 </ng-template>
 
 @if (inline()) {

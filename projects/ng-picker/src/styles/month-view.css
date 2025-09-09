@@ -3,35 +3,52 @@
 }
 
 .pk-picker-weekday-cell {
-  color: var(--pk-picker-weekday-cell);
+  color: var(--pk-weekday-cell);
 }
 
-.pk-picker-day-cell {
-  height: var(--pk-picker-date-size);
-  width: var(--pk-picker-date-size);
-  border-radius: var(--pk-picker-date-radius);
+/* --pk-day-cell-border-radius: 8px;
+  --pk-day-cell-height: 36px;
+  --pk-day-cell-width: 36px; */
+
+.pk-day-cell {
+  height: var(--pk-day-cell-height);
+  width: var(--pk-day-cell-width);
+  border-radius: var(--pk-day-cell-border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
   &:hover {
-    background: var(--pk-picker-bg-hover);
+    background: var(--pk-day-cell-hover-bg);
+    color: var(--pk-day-cell-hover-fg);
+  }
+  &.pk-day-cell-today {
+    background: var(--pk-day-cell-today-bg);
+    color: var(--pk-day-cell-today-fg);
   }
 
-  &.pk-picker-day-cell-today {
-    border: 1px solid var(--pk-picker-today-ring);
+  &.pk-day-cell-selected {
+    background: var(--pk-day-cell-selected-bg);
+    color: var(--pk-day-cell-selected-fg);
   }
 
-  &.pk-picker-day-cell-selected {
-    background: var(--pk-picker-selected-bg);
-    color: var(--pk-picker-selected-fg);
-  }
-
-  &.pk-picker-day-cell-in-range {
-    background: var(--pk-picker-range-bg);
+  &.pk-day-cell-in-range {
+    background: var(--pk-day-cell-in-range-bg);
+    color: var(--pk-day-cell-in-range-fg);
   }
 
   &.pk-picker-day-cell-in-hover-range {
-    background: var(--pk-picker-hover-range-bg);
+    background: var(--pk-hover-range-bg);
   }
+}
+
+.pk-day-cell-blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--pk-day-cell-height);
+  width: var(--pk-day-cell-width);
+  background: var(--pk-day-cell-blank-bg);
+  color: var(--pk-day-cell-blank-fg);
 }

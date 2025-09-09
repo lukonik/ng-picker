@@ -96,9 +96,28 @@ export class MonthView<D> {
     return cells;
   });
 
-  // Helper for template loops over pad counts
-  pad(count: number): number[] {
-    return Array.from({ length: count }, (_, i) => i);
+  // Helpers to generate pad cells showing day numbers from adjacent months
+  startPad(count: number): { displayValue: string }[] {
+    if (!count) return [];
+    const prevMonth = this._adapter.addCalendarMonths(this.period(), -1);
+    const prevDays = this._adapter.getNumDaysInMonth(prevMonth);
+    const dateNames = this._adapter.getDateNames();
+    const from = prevDays - count + 1;
+    const result: { displayValue: string }[] = [];
+    for (let d = from; d <= prevDays; d++) {
+      result.push({ displayValue: dateNames[d - 1] });
+    }
+    return result;
+  }
+
+  endPad(count: number): { displayValue: string }[] {
+    if (!count) return [];
+    const dateNames = this._adapter.getDateNames();
+    const result: { displayValue: string }[] = [];
+    for (let d = 1; d <= count; d++) {
+      result.push({ displayValue: dateNames[d - 1] });
+    }
+    return result;
   }
 
   weekCells = computed(() => {

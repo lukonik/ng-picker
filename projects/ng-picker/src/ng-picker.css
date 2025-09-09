@@ -2,6 +2,7 @@
    This file ships with the library and can be imported
    by consumers in their global styles.
 */
+@import './styles/reset.css';
 @import './styles/datepicker.css';
 @import './styles/month-view.css';
 @import './styles/year-view.css';
@@ -10,79 +11,32 @@
 
 /* Default tokens (light) */
 :root {
-  /* Brand primary (Tailwind slate-900) */
-  --pk-picker-primary: #0f172a;
-
-  /* Base colors */
-  --pk-picker-fg: oklch(28% 0.03 260);
-  --pk-picker-disabled-fg: oklch(60% 0.02 260);
-  --pk-picker-bg: white;
-  --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
-  --pk-picker-border: oklch(92.8% 0.006 264.531);
-  --pk-picker-icon-fg: var(--pk-picker-primary);
-
-  /* Date cells */
-  --pk-picker-date-size: 32px;
-  --pk-picker-date-radius: 9999px;
-  --pk-picker-selected-bg: var(--pk-picker-primary);
-  --pk-picker-selected-fg: white;
-  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary) 10%, white);
-  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary) 5%, white);
-  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 75%);
+  /* Day cells */
+  --pk-day-cell-border-radius: 8px;
+  --pk-day-cell-height: 36px;
+  --pk-day-cell-width: 36px;
+  --pk-day-cell-selected-fg: white;
+  --pk-day-cell-selected-bg: oklch(21% 0.034 264.665);
+  --pk-day-cell-hover-fg: black;
+  --pk-day-cell-hover-bg: oklch(96.7% 0.003 264.542);
+  --pk-day-cell-today-fg: black;
+  --pk-day-cell-today-bg: oklch(96.7% 0.003 264.542);
+  --pk-day-cell-in-range-fg: white;
+  --pk-day-cell-in-range-bg: oklch(44.6% 0.03 256.802);
+  --pk-day-cell-blank-fg: oklch(87.2% 0.01 258.338);
+  --pk-day-cell-blank-bg: transparent;
 
   /** Weekday cell **/
-  --pk-picker-weekday-cell: oklch(27.8% 0.033 256.848);
+  --pk-weekday-cell: oklch(27.8% 0.033 256.848);
 
   /* Datepicker panel */
-  --pk-picker-datepicker-border: var(--pk-picker-border);
-  --pk-picker-datepicker-border-radius: 12px;
-}
-
-/* Optional theme containers */
-.pk-picker-theme-light {
-  color: var(--pk-picker-fg);
-  /* keep primary same as :root */
-  --pk-picker-icon-fg: var(--pk-picker-primary);
-  --pk-picker-selected-bg: var(--pk-picker-primary);
-  --pk-picker-selected-fg: white;
-  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary) 10%, white);
-  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary) 5%, white);
-  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 75%);
-}
-
-.pk-picker-theme-dark {
-  color: var(--pk-picker-fg);
-  --pk-picker-fg: oklch(92% 0.02 260);
-  --pk-picker-disabled-fg: oklch(70% 0.02 260);
-  --pk-picker-bg: oklch(22% 0.03 260);
-  --pk-picker-bg-hover: oklch(28% 0.03 260);
-  --pk-picker-border: oklch(30% 0.02 260);
-  /* use readable icon color in dark */
-  --pk-picker-icon-fg: var(--pk-picker-fg);
-  /* derive selected from primary but lighter for contrast */
-  --pk-picker-selected-bg: color-mix(in oklab, var(--pk-picker-primary), white 70%);
-  --pk-picker-selected-fg: black;
-  --pk-picker-range-bg: color-mix(in oklab, var(--pk-picker-primary), white 85%);
-  --pk-picker-hover-range-bg: color-mix(in oklab, var(--pk-picker-primary), white 90%);
-  --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 65%);
+  --pk-datepicker-border: oklch(87.2% 0.01 258.338);
+  --pk-datepicker-border-radius: 16px;
+  --pk-datepicker-padding: 10px;
 }
 
 .pk-picker-datepicker {
   display: block;
-
-  button {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: none;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    color: inherit;
-    line-height: inherit;
-    text-align: inherit;
-  }
 
   /* Calendar header */
   .pk-picker-calendar-month-header {
@@ -103,9 +57,9 @@
     width: 32px;
     height: 32px;
     cursor: pointer;
-    color: var(--pk-picker-icon-fg);
+    color: var(--pk-icon-fg);
     &:hover {
-      background: var(--pk-picker-bg-hover);
+      background: var(--pk-bg-hover);
     }
   }
 
@@ -122,7 +76,7 @@
     padding: 4px 6px;
     cursor: pointer;
     &:hover {
-      background: var(--pk-picker-bg-hover);
+      background: var(--pk-bg-hover);
     }
   }
 
@@ -130,37 +84,37 @@
 
   /* Base date cell */
   .pk-picker-date-cell {
-    width: var(--pk-picker-date-size);
-    height: var(--pk-picker-date-size);
-    border-radius: var(--pk-picker-date-radius);
+    width: var(--pk-date-size);
+    height: var(--pk-date-size);
+    border-radius: var(--pk-date-radius);
     display: inline-grid;
     place-items: center;
-    color: var(--pk-picker-fg);
+    color: var(--pk-fg);
   }
 
   /* Hover and focus */
   .pk-picker-date-cell:not(.pk-picker-date-cell--disabled):hover {
-    background: var(--pk-picker-bg-hover);
+    background: var(--pk-bg-hover);
   }
   .pk-picker-date-cell:focus-visible {
-    outline: 2px solid color-mix(in oklab, var(--pk-picker-selected-bg), black 10%);
+    outline: 2px solid color-mix(in oklab, var(--pk-selected-bg), black 10%);
     outline-offset: 2px;
   }
 
   /* Today */
   .pk-picker-date-cell--today {
-    box-shadow: inset 0 0 0 2px var(--pk-picker-today-ring);
+    box-shadow: inset 0 0 0 2px var(--pk-today-ring);
   }
 
   /* Selected */
   .pk-picker-date-cell--selected {
-    background: var(--pk-picker-selected-bg);
-    color: var(--pk-picker-selected-fg);
+    background: var(--pk-selected-bg);
+    color: var(--pk-selected-fg);
   }
 
   /* Disabled */
   .pk-picker-date-cell--disabled {
-    color: var(--pk-picker-disabled-fg);
+    color: var(--pk-disabled-fg);
     pointer-events: none;
   }
 }
