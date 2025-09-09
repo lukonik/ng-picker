@@ -18,7 +18,6 @@ export class GridRow {
   constructor() {
     effect(() => {
       const cells = this.cells();
-      console.log('cells', cells);
       this.sub?.unsubscribe();
       this.sub = new Subscription();
       cells.forEach((cell, index) => {

@@ -23,6 +23,12 @@ export class Calendar<D> {
 
   selectDate = output<DateCell<D>>();
 
+  startView = input<ViewTypes, ViewTypes>('month', {
+    transform: (value: ViewTypes) => {
+      this.view.set(value);
+      return value;
+    },
+  });
   value = input.required<DatepickerValue<D>>();
   mode = input.required<DatepickerMode>();
   disablePast = input.required<boolean>();
