@@ -8,6 +8,7 @@ import { CdkPortal, CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import {
   booleanAttribute,
   Component,
+  computed,
   contentChild,
   inject,
   input,
@@ -18,6 +19,7 @@ import {
 import { Calendar } from '../calendar/calendar';
 import { CalendarCellRef } from '../calendar/templates/calendar-cell-ref';
 import { DatepickerUtils } from '../services/datepicker-utils';
+import { DateAdapter } from '../adapters/date-adapter';
 import {
   DateCell,
   DatepickerMode,
@@ -38,11 +40,15 @@ import {
 export class Datepicker<D> {
   private _datepickerUtils = inject<DatepickerUtils<D>>(DatepickerUtils);
   private _overlay = inject(Overlay);
+  private _adapter = inject<DateAdapter<D>>(DateAdapter);
 
   inline = input(false);
   portal = viewChild.required<CdkPortal>('pickerPortal');
   overlayRef = signal<OverlayRef | null>(null);
   value = model<DatepickerValue<D>>(null);
+  displayValue = computed<string>(() =>
+    this._datepickerUtils.getDisplayValue(this.value(), this.mode()),
+  );
   mode = input<DatepickerMode>('single');
   startView = input<ViewTypes>('month');
   calendarCellRef = contentChild(CalendarCellRef);
@@ -55,7 +61,20 @@ export class Datepicker<D> {
   filterDate = input<FilterDate<D>>();
 
   selectDate(cell: DateCell<D>) {
-    this.value.set(this._datepickerUtils.selectDate(cell.date, this.value(), this.mode()));
+    const next = this._datepickerUtils.selectDate(cell.date, this.value(), this.mode());
+    this.value.set(next);
+
+    const mode = this.mode();
+    if (mode === 'single') {
+      this.close();
+    } else if (mode === 'range') {
+      if (next && typeof next === 'object' && !Array.isArray(next)) {
+        const range = next as { start: D | null; end: D | null };
+        if (range.start && range.end) {
+          this.close();
+        }
+      }
+    }
   }
 
   open(origin?: HTMLElement) {
@@ -92,6 +111,21 @@ export class Datepicker<D> {
       ref.detach();
       ref.dispose();
       this.overlayRef.set(null);
+    }
+  }
+
+  parse(input: string) {
+    const mode = this.mode();
+    if (mode !== 'single') {
+      // For now only single-mode parsing is supported from text input.
+      this.value.set(null);
+      return;
+    }
+    const parsed = this._adapter.parse(input, undefined);
+    if (parsed && this._adapter.isValid(parsed)) {
+      this.value.set(parsed as DatepickerValue<D>);
+    } else {
+      this.value.set(null);
     }
   }
 }

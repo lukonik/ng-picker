@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { DateAdapter } from '../../../ng-picker/src/lib/adapters/date-adapter';
-import { Datepicker, Toggle } from '../../../ng-picker/src/public-api';
+import { Datepicker, DatepickerInput, Toggle } from '../../../ng-picker/src/public-api';
 
 @Component({
   selector: 'app-root',
-  imports: [Datepicker, Toggle],
+  imports: [Datepicker, Toggle, DatepickerInput],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

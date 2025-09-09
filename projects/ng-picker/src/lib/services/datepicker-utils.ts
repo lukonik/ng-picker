@@ -4,7 +4,33 @@ import { DatepickerMode, DatepickerValue, FilterDate } from '../types/ng-picker.
 
 @Injectable()
 export class DatepickerUtils<D> {
-  private _adapter = inject<DateAdapter<unknown>>(DateAdapter);
+  private _adapter = inject<DateAdapter<D>>(DateAdapter);
+
+  getDisplayValue(value: DatepickerValue<D>, mode: DatepickerMode): string {
+    const fmt: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+
+    if (!value) return '';
+
+    switch (mode) {
+      case 'single': {
+        return this._adapter.format(value as D, fmt);
+      }
+      case 'multi': {
+        const arr = Array.isArray(value) ? (value as D[]) : [];
+        return arr.map((d) => this._adapter.format(d, fmt)).join(', ');
+      }
+      case 'range': {
+        if (!value || Array.isArray(value) || typeof value !== 'object') return '';
+        const { start, end } = value as { start: D | null; end: D | null };
+        const s = start ? this._adapter.format(start, fmt) : '';
+        const e = end ? this._adapter.format(end, fmt) : '';
+        if (s && e) return `${s} – ${e}`;
+        if (s && !e) return `${s} –`;
+        if (!s && e) return `– ${e}`;
+        return '';
+      }
+    }
+  }
 
   isSelected(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
     switch (mode) {

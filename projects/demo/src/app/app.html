@@ -1,5 +1,5 @@
 <div style="margin-top: 50px">
   <button [pkToggle]="picker">toggle</button>
-  <pk-datepicker [(value)]="today" #picker mode="single" style="width: 250px; margin: 0 auto">
-  </pk-datepicker>
+  <input [pkDatepickerInput]="picker" />
+  <pk-datepicker [(value)]="today" #picker style="width: 250px; margin: 0 auto"> </pk-datepicker>
 </div>
