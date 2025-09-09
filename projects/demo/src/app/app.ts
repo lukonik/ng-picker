@@ -10,5 +10,5 @@ import { Datepicker, DatepickerInput, Toggle } from '../../../ng-picker/src/publ
 })
 export class App {
   protected readonly title = signal('demo');
-  today = inject(DateAdapter).today();
+  today = inject<DateAdapter<Date>>(DateAdapter).createDate(2025, 11, 11);
 }

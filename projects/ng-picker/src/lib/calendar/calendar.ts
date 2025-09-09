@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal, output, signal } from '@angular/core';
 import { DateAdapter } from '../adapters/date-adapter';
 import {
   DateCell,
@@ -38,7 +38,25 @@ export class Calendar<D> {
   filterDate = input<FilterDate<D>>();
 
   view = signal<ViewTypes>('multi-year');
-  period = signal<D>(this._adapter.today());
+  // Period is linked to the current value when present; otherwise defaults to today.
+  // - single: uses the single date value
+  // - range: prefers start, then end
+  // - multi: uses the first selected date
+  period = linkedSignal<D>(() => {
+    const v = this.value();
+    if (Array.isArray(v)) {
+      const first = (v as D[])[0];
+      return first ?? this._adapter.today();
+    }
+    if (v != null && this._adapter.isDateInstance(v)) {
+      return v as D;
+    }
+    if (v && typeof v === 'object') {
+      const r = v as { start: D | null; end: D | null };
+      return r.start ?? r.end ?? this._adapter.today();
+    }
+    return this._adapter.today();
+  });
   today = signal<D>(this._adapter.today());
   calendarCellRef = input<CalendarCellRef>();
 
