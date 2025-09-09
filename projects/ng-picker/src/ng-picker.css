@@ -8,10 +8,59 @@
 @import './styles/multi-year.css';
 @import './styles/calendar.css';
 
+/* Default tokens (light) */
 :root {
+  /* Base colors */
+  --pk-picker-fg: oklch(28% 0.03 260);
+  --pk-picker-disabled-fg: oklch(60% 0.02 260);
+  --pk-picker-bg: white;
   --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
-  --pk-picker-datepicker-border: oklch(92.8% 0.006 264.531);
+  --pk-picker-border: oklch(92.8% 0.006 264.531);
+  --pk-picker-icon-fg: oklch(28% 0.03 260);
+
+  /* Date cells */
+  --pk-picker-date-size: 32px;
+  --pk-picker-date-radius: 9999px;
+  --pk-picker-selected-bg: oklch(65% 0.11 250);
+  --pk-picker-selected-fg: white;
+  --pk-picker-range-bg: oklch(90% 0.02 260);
+  --pk-picker-hover-range-bg: oklch(95% 0.01 260);
+  --pk-picker-today-ring: oklch(27.8% 0.033 256.848);
+
+  /* Datepicker panel */
+  --pk-picker-datepicker-border: var(--pk-picker-border);
   --pk-picker-datepicker-border-radius: 12px;
+}
+
+/* Optional theme containers */
+.pk-picker-theme-light {
+  color: var(--pk-picker-fg);
+  --pk-picker-fg: oklch(28% 0.03 260);
+  --pk-picker-disabled-fg: oklch(60% 0.02 260);
+  --pk-picker-bg: white;
+  --pk-picker-bg-hover: oklch(96.7% 0.003 264.542);
+  --pk-picker-border: oklch(92.8% 0.006 264.531);
+  --pk-picker-icon-fg: oklch(28% 0.03 260);
+  --pk-picker-selected-bg: oklch(65% 0.11 250);
+  --pk-picker-selected-fg: white;
+  --pk-picker-range-bg: oklch(90% 0.02 260);
+  --pk-picker-hover-range-bg: oklch(95% 0.01 260);
+  --pk-picker-today-ring: oklch(27.8% 0.033 256.848);
+}
+
+.pk-picker-theme-dark {
+  color: var(--pk-picker-fg);
+  --pk-picker-fg: oklch(92% 0.02 260);
+  --pk-picker-disabled-fg: oklch(70% 0.02 260);
+  --pk-picker-bg: oklch(22% 0.03 260);
+  --pk-picker-bg-hover: oklch(28% 0.03 260);
+  --pk-picker-border: oklch(30% 0.02 260);
+  --pk-picker-icon-fg: oklch(92% 0.02 260);
+  --pk-picker-selected-bg: oklch(70% 0.11 250);
+  --pk-picker-selected-fg: black;
+  --pk-picker-range-bg: oklch(35% 0.02 260);
+  --pk-picker-hover-range-bg: oklch(32% 0.02 260);
+  --pk-picker-today-ring: oklch(80% 0.05 256.848);
 }
 
 pk-datepicker {
@@ -32,7 +81,7 @@ pk-datepicker {
   }
 
   /* Calendar header */
-  .pk-calendar-month-header {
+  .pk-picker-calendar-month-header {
     display: flex;
     align-items: center;
     padding-top: 6px;
@@ -42,7 +91,7 @@ pk-datepicker {
     display: inline-flex;
   }
 
-  .pk-calendar-nav {
+  .pk-picker-calendar-nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,20 +99,21 @@ pk-datepicker {
     width: 32px;
     height: 32px;
     cursor: pointer;
+    color: var(--pk-picker-icon-fg);
     &:hover {
       background: var(--pk-picker-bg-hover);
     }
   }
 
-  .pk-calendar-month-header-current {
+  .pk-picker-calendar-month-header-current {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 0 auto;
   }
 
-  .pk-calendar-month-header-current-year,
-  .pk-calendar-month-header-current-month {
+  .pk-picker-calendar-month-header-current-year,
+  .pk-picker-calendar-month-header-current-month {
     border-radius: 6px;
     padding: 4px 6px;
     cursor: pointer;
@@ -76,37 +126,37 @@ pk-datepicker {
 
   /* Base date cell */
   .pk-picker-date-cell {
-    width: var(--pk-date-size);
-    height: var(--pk-date-size);
-    border-radius: var(--pk-date-radius);
+    width: var(--pk-picker-date-size);
+    height: var(--pk-picker-date-size);
+    border-radius: var(--pk-picker-date-radius);
     display: inline-grid;
     place-items: center;
-    color: var(--pk-fg);
+    color: var(--pk-picker-fg);
   }
 
   /* Hover and focus */
   .pk-picker-date-cell:not(.pk-picker-date-cell--disabled):hover {
-    background: var(--pk-bg-hover);
+    background: var(--pk-picker-bg-hover);
   }
   .pk-picker-date-cell:focus-visible {
-    outline: 2px solid color-mix(in oklab, var(--pk-selected-bg), black 10%);
+    outline: 2px solid color-mix(in oklab, var(--pk-picker-selected-bg), black 10%);
     outline-offset: 2px;
   }
 
   /* Today */
   .pk-picker-date-cell--today {
-    box-shadow: inset 0 0 0 2px var(--pk-today-ring);
+    box-shadow: inset 0 0 0 2px var(--pk-picker-today-ring);
   }
 
   /* Selected */
   .pk-picker-date-cell--selected {
-    background: var(--pk-selected-bg);
-    color: var(--pk-selected-fg);
+    background: var(--pk-picker-selected-bg);
+    color: var(--pk-picker-selected-fg);
   }
 
   /* Disabled */
   .pk-picker-date-cell--disabled {
-    color: var(--pk-disabled-fg);
+    color: var(--pk-picker-disabled-fg);
     pointer-events: none;
   }
 }

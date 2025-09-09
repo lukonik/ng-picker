@@ -3,9 +3,9 @@
 }
 
 .pk-picker-day-cell {
-  height: 32px;
-  width: 32px;
-  border-radius: 100%;
+  height: var(--pk-picker-date-size);
+  width: var(--pk-picker-date-size);
+  border-radius: var(--pk-picker-date-radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,19 +15,19 @@
   }
 
   &.pk-picker-day-cell-today {
-    border: 1px solid oklch(27.8% 0.033 256.848);
+    border: 1px solid var(--pk-picker-today-ring);
   }
 
   &.pk-picker-day-cell-selected {
-    background: lightblue;
-    color: white;
+    background: var(--pk-picker-selected-bg);
+    color: var(--pk-picker-selected-fg);
   }
 
   &.pk-picker-day-cell-in-range {
-    background: aquamarine;
+    background: var(--pk-picker-range-bg);
   }
 
   &.pk-picker-day-cell-in-hover-range {
-    background: antiquewhite;
+    background: var(--pk-picker-hover-range-bg);
   }
 }
