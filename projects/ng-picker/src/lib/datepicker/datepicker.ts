@@ -36,7 +36,7 @@ import {
   },
 })
 export class Datepicker<D> {
-  private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);
+  private _datepickerUtils = inject<DatepickerUtils<D>>(DatepickerUtils);
   private _overlay = inject(Overlay);
 
   inline = input(false);

@@ -22,7 +22,7 @@ import { CalendarCellRef } from '../templates/calendar-cell-ref';
 })
 export class MonthView<D> {
   private _adapter = inject<DateAdapter<D>>(DateAdapter);
-  private _datepickerUtils = inject<DatepickerUtils>(DatepickerUtils);
+  private _datepickerUtils = inject<DatepickerUtils<D>>(DatepickerUtils);
 
   currentMonth = computed(() => {
     const month = this._adapter.getMonth(this.period());

@@ -3,10 +3,10 @@ import { DateAdapter } from '../adapters/date-adapter';
 import { DatepickerMode, DatepickerValue, FilterDate } from '../types/ng-picker.types';
 
 @Injectable()
-export class DatepickerUtils {
+export class DatepickerUtils<D> {
   private _adapter = inject<DateAdapter<unknown>>(DateAdapter);
 
-  isSelected<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
+  isSelected(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
     switch (mode) {
       case 'single':
         return this.isSelectedInSingle(date, value);
@@ -19,7 +19,7 @@ export class DatepickerUtils {
 
   // Returns true only for dates strictly between start and end in range mode.
   // For 'single' and 'multi' modes, always false.
-  isInRange<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
+  isInRange(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
     if (mode !== 'range') {
       return false;
     }
@@ -43,7 +43,7 @@ export class DatepickerUtils {
     );
   }
 
-  private isSelectedInMulti<D>(date: D, value: DatepickerValue<D>) {
+  private isSelectedInMulti(date: D, value: DatepickerValue<D>) {
     if (Array.isArray(value)) {
       const arr = value as D[];
       return arr.some((v) => this._adapter.sameDate(date, v));
@@ -51,11 +51,11 @@ export class DatepickerUtils {
     return false;
   }
 
-  private isSelectedInSingle<D>(date: D, value: DatepickerValue<D>) {
+  private isSelectedInSingle(date: D, value: DatepickerValue<D>) {
     return value != null && this._adapter.sameDate(date, value as D);
   }
 
-  private isSelectedInRange<D>(date: D, value: DatepickerValue<D>) {
+  private isSelectedInRange(date: D, value: DatepickerValue<D>) {
     if (value && typeof value === 'object' && !Array.isArray(value)) {
       const range = value as { start: D | null; end: D | null };
       const isStart = !!range.start && this._adapter.sameDate(date, range.start);
@@ -65,7 +65,7 @@ export class DatepickerUtils {
     return false;
   }
 
-  selectDate<D>(date: D, value: DatepickerValue<D>, mode: DatepickerMode): DatepickerValue<D> {
+  selectDate(date: D, value: DatepickerValue<D>, mode: DatepickerMode): DatepickerValue<D> {
     switch (mode) {
       case 'single':
         return this.selectDateInSingle(date);
@@ -78,7 +78,7 @@ export class DatepickerUtils {
     }
   }
 
-  private selectDateInMulti<D>(date: D, value: DatepickerValue<D>): D[] {
+  private selectDateInMulti(date: D, value: DatepickerValue<D>): D[] {
     const current = Array.isArray(value) ? (value as D[]) : [];
     const exists = current.some((v) => this._adapter.sameDate(v, date));
     if (exists) {
@@ -87,11 +87,11 @@ export class DatepickerUtils {
     return [...current, date];
   }
 
-  private selectDateInSingle<D>(date: D): D {
+  private selectDateInSingle(date: D): D {
     return date;
   }
 
-  private selectDateInRange<D>(
+  private selectDateInRange(
     date: D,
     value: DatepickerValue<D>,
   ): { start: D | null; end: D | null } {
@@ -124,7 +124,7 @@ export class DatepickerUtils {
     return { start: date, end: null };
   }
 
-  isDateDisabled<D>(
+  isDateDisabled(
     date: D,
     disablePast: boolean,
     disableFuture: boolean,

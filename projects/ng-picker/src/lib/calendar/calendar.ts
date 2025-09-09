@@ -7,7 +7,6 @@ import {
   FilterDate,
   ViewTypes,
 } from '../types/ng-picker.types';
-import { CalendarHeader } from './calendar-header/calendar-header';
 import { MonthView } from './month-view/month-view';
 import { MultiYearView } from './multi-year-view/multi-year-view';
 import { CalendarCellRef } from './templates/calendar-cell-ref';
@@ -15,7 +14,7 @@ import { YearView } from './year-view/year-view';
 
 @Component({
   selector: 'pk-calendar',
-  imports: [MonthView, CalendarHeader, YearView, MultiYearView],
+  imports: [MonthView, YearView, MultiYearView],
   templateUrl: './calendar.html',
 })
 export class Calendar<D> {
