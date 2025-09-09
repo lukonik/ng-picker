@@ -13,13 +13,14 @@ import {
   inject,
   input,
   model,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
+import { DateAdapter } from '../adapters/date-adapter';
 import { Calendar } from '../calendar/calendar';
 import { CalendarCellRef } from '../calendar/templates/calendar-cell-ref';
 import { DatepickerUtils } from '../services/datepicker-utils';
-import { DateAdapter } from '../adapters/date-adapter';
 import {
   DateCell,
   DatepickerMode,
@@ -60,6 +61,8 @@ export class Datepicker<D> {
   maxDate = input<D>();
   filterDate = input<FilterDate<D>>();
 
+  valueChange = output();
+
   selectDate(cell: DateCell<D>) {
     const next = this._datepickerUtils.selectDate(cell.date, this.value(), this.mode());
     this.value.set(next);
@@ -75,6 +78,8 @@ export class Datepicker<D> {
         }
       }
     }
+
+    this.valueChange.emit();
   }
 
   open(origin?: HTMLElement) {
@@ -114,18 +119,8 @@ export class Datepicker<D> {
     }
   }
 
-  parse(input: string) {
-    const mode = this.mode();
-    if (mode !== 'single') {
-      // For now only single-mode parsing is supported from text input.
-      this.value.set(null);
-      return;
-    }
-    const parsed = this._adapter.parse(input, undefined);
-    if (parsed && this._adapter.isValid(parsed)) {
-      this.value.set(parsed as DatepickerValue<D>);
-    } else {
-      this.value.set(null);
-    }
+  parse(input: string | DatepickerValue<D> | null | undefined) {
+    const parsed = this._datepickerUtils.parse(input, this.mode());
+    this.value.set(parsed);
   }
 }

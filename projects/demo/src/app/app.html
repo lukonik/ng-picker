@@ -1,6 +1,5 @@
 <div style="margin-top: 50px">
-  <button [pkToggle]="picker">toggle</button>
-  <input [pkDatepickerInput]="picker" />
-  <pk-datepicker #picker [inline]="true" mode="range" style="width: 350px; margin: 0 auto">
-  </pk-datepicker>
+  <!-- <button [pkToggle]="picker">toggle</button> -->
+  <input [(ngModel)]="value" required [pkDatepickerInput]="picker" />
+  <pk-datepicker #picker mode="multi" style="width: 350px; margin: 0 auto"> </pk-datepicker>
 </div>

@@ -32,6 +32,37 @@ export class DatepickerUtils<D> {
     }
   }
 
+  parse(
+    input: string | DatepickerValue<D> | null | undefined,
+    mode: DatepickerMode,
+  ): DatepickerValue<D> {
+    if (input == null) return null;
+
+    if (typeof input === 'string') {
+      if (mode !== 'single') return null;
+      const parsed = this._adapter.parse(input, undefined);
+      return parsed && this._adapter.isValid(parsed) ? (parsed as D) : null;
+    }
+
+    if (Array.isArray(input)) {
+      return mode === 'multi' ? (input as D[]) : null;
+    }
+
+    if (this._adapter.isDateInstance(input)) {
+      return mode === 'single' ? (input as D) : null;
+    }
+
+    if (mode === 'range') {
+      const anyObj = input as unknown as { start?: D | null; end?: D | null };
+      return { start: anyObj.start ?? null, end: anyObj.end ?? null } as {
+        start: D | null;
+        end: D | null;
+      };
+    }
+
+    return null;
+  }
+
   isSelected(date: D, value: DatepickerValue<D>, mode: DatepickerMode): boolean {
     switch (mode) {
       case 'single':
