@@ -58,15 +58,17 @@
         pkGridCell
         class="pk-picker-day-cell"
         [class.pk-picker-day-cell-selected]="cell.isSelected"
-        [class.pk-day-cell-today]="cell.isToday"
+        [class.pk-picker-day-cell-today]="cell.isToday"
         [class.pk-picker-day-cell-in-range]="cell.isInRange"
         [disabled]="cell.isDisabled"
         (click)="selectDate.emit(cell)"
       >
-        <pk-month-view-cell
-          [calendarCellRef]="calendarCellRef()"
-          [cell]="cell"
-        ></pk-month-view-cell>
+        @let _cell=cell; @if(calendarCellRef();as _ref) {
+        <ng-container
+          *ngTemplateOutlet="_ref.tempRef; context: { $implicit: _cell }"
+        ></ng-container>
+        } @else{
+        {{ _cell.displayValue }} }
       </button>
     </td>
     } @for (_ of pad(week.endPad); track $index) {

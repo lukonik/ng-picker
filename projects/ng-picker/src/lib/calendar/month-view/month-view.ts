@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, output } from '@angular/core';
 import { Grid } from '../../a11y/grid/grid';
 import { GridCell } from '../../a11y/grid/grid-cell';
@@ -12,11 +13,10 @@ import {
   ViewTypes,
 } from '../../types/ng-picker.types';
 import { CalendarCellRef } from '../templates/calendar-cell-ref';
-import { MonthViewCell } from './month-view-cell/month-view-cell';
 
 @Component({
   selector: 'pk-month-view',
-  imports: [MonthViewCell, Grid, GridCell, GridRow],
+  imports: [Grid, GridCell, GridRow, NgTemplateOutlet],
   templateUrl: './month-view.html',
   styleUrl: './month-view.css',
 })
