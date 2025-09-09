@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 /* Import ng-picker demo styles */
+@import '@angular/cdk/overlay-prebuilt.css';
 @import '../../ng-picker/src/ng-picker.css';
 @import '../../ng-picker/src/themes/tailwind.css';

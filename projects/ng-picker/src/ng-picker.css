@@ -67,7 +67,7 @@
   --pk-picker-today-ring: color-mix(in oklab, var(--pk-picker-primary), white 65%);
 }
 
-pk-datepicker {
+.pk-picker-datepicker {
   display: block;
 
   button {
@@ -163,4 +163,17 @@ pk-datepicker {
     color: var(--pk-picker-disabled-fg);
     pointer-events: none;
   }
+}
+
+/* Native popover anchored below the trigger */
+.pk-picker-popover:popover-open {
+  /* Use anchored positioning to place below origin */
+  position: absolute;
+  inset: auto;
+  top: anchor(bottom);
+  left: anchor(center);
+  /* center horizontally and add vertical offset */
+  translate: -50% 8px;
+  /* Optional: prevent overly wide popover */
+  max-width: min(100vw - 16px, 360px);
 }
